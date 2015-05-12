@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="WebDriverTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2015-05-12T19:50:11" hostname="MN-IKONOMOV-L" time="11.306">
+  <properties/>
+  <testcase name="testSomething" classname="WebDriverTests" time="11.306"/>
+  <system-out><![CDATA[hello]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
