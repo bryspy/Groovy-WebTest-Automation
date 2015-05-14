@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="hello.HelloTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2015-05-13T19:10:03" hostname="MN-IKONOMOV-L" time="6.947">
-  <properties/>
-  <testcase name="testHello" classname="hello.HelloTest" time="6.947"/>
-  <system-out><![CDATA[hello]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
