@@ -2,7 +2,7 @@
 class Hello{
 
 
-	void testSomething() {
+	void sayHello() {
 		print 'hello world';
 	}
 
@@ -10,4 +10,4 @@ class Hello{
 
 def hello = new Hello()
 
-hello.testSomething()
+hello.sayHello()
