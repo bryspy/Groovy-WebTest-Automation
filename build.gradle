@@ -47,10 +47,13 @@ task testAll(type: Test, dependsOn: testClasses) {
   include 'src/main/test/*'
 }
 
+task forceTest (type: Test, dependsOn: testClasses) {
+  outputs.upToDateWhen { false }
+}
+
 
 tasks.withType(Test) {
   testLogging {
     events 'started', 'passed'
   }
-  outputs.upToDateWhen { false }
 }
