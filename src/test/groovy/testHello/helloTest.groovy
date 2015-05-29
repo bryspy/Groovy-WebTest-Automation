@@ -35,12 +35,15 @@ class HelloTest  extends GroovyTestCase {
 	@Before
 	public void createDriver() {
 	  //driver = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome())
-		driver = new FirefoxDriver()
+		// driver = new FirefoxDriver()
 	}
 
 	@After
 	public void quitDriver() {
-	  driver.quit()
+	  if (driver != null) {
+			driver.quit()
+		}
+
 	}
 
 
@@ -57,7 +60,8 @@ class HelloTest  extends GroovyTestCase {
 
 	@Test void testDB() {
 
-		def sql = Sql.newInstance("${properties.ordsys12JDBC}", "oracle.jdbc.driver.OracleDriver")
+		def sql = Sql.newInstance("${properties.ordsys12JDBC}", "${properties.jdbcDriver}")
+		sql
 
 	}
 
