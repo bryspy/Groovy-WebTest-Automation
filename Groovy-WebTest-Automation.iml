@@ -58,5 +58,14 @@
     <orderEntry type="library" exported="" name="Gradle: org.eclipse.jetty:jetty-io:8.1.15.v20140411" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.eclipse.jetty:jetty-http:8.1.15.v20140411" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.httpcomponents:httpcore:4.3.3" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library name="Gradle: ojdbc14-10.2.0.4.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/ojdbc14-10.2.0.4.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

@@ -18,14 +18,6 @@ class HelloTest  extends GroovyTestCase {
 	Properties properties = new Properties();
 	def File propFile = new File('src/test/resources/sut.properties').withInputStream {properties.load(it)};
 
-	/*@BeforeClass
-	public static void createAndStartService() {
-	  service = new ChromeDriverService.Builder()
-	  	  .usingChromeDriverExecutable(new File('E:/ChromeDriver/chromedriver.exe'))
-		  .usingPort(4444)
- 		  .build()
-	  service.start()
-	}*/
 
 	@AfterClass
 	public static void createAndStopService() {
@@ -60,8 +52,33 @@ class HelloTest  extends GroovyTestCase {
 
 	@Test void testDB() {
 
-		def sql = Sql.newInstance("${properties.ordsys12JDBC}", "${properties.jdbcDriver}")
-		sql
+		def ordsys12Con = Sql.newInstance("${properties.ordsys12JDBC}", "${properties.jdbcDriver}")
+		def ord12Rows = ordsys12Con.rows("select * from pmt_payment_information where modification_date > sysdate -1/24")
+		println "found ${ord12Rows.size()} ord12Rows"
+
+//		ord12Rows.each {row ->
+//			println "row: ${row} \n"
+//		}
+
+		def shrSys11Con = Sql.newInstance("${properties.ordsys12JDBC}", "${properties.jdbcDriver}")
+		def shr11Rows = shrSys11Con.rows("select * from pmt_payment_information where modification_date > sysdate -1/24")
+		println "found ${shr11Rows.size()} ord12Rows"
+
+		def index = 0
+		ord12Rows.each {row ->
+//			println row
+			def shrRow = shr11Rows.get(index)
+
+			row.each {column ->
+
+				if (!column.value.equals(shrRow.getAt(column.key))) {
+					println "ord12 ${column.key}: ${column.value} Does not Match shr11 ${shrRow.getAt(column.value)}!!!"
+				}
+			}
+			assert row.equals(shr11Rows.get(index))
+			index++
+		}
+
 
 	}
 
