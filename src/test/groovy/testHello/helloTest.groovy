@@ -1,5 +1,5 @@
 package hello
-import groovy.sql.*
+import groovy.sql.Sql
 import org.junit.AfterClass
 import org.junit.After
 import org.junit.Before
@@ -15,9 +15,10 @@ class HelloTest  extends GroovyTestCase {
 	/*private static ChromeDriverService service*/
 
 	private WebDriver driver
-	Properties properties = new Properties();
-	def File propFile = new File('src/test/resources/sut.properties').withInputStream {properties.load(it)};
+	// Properties properties = new Properties();
+	// def File propFile = new File('src/test/resources/sut.properties').withInputStream {properties.load(it)};
 
+	def config = new ConfigSlurper().parse(new File("src/test/resources/sutProperties.groovy").toURL())
 
 	@AfterClass
 	public static void createAndStopService() {
@@ -52,17 +53,21 @@ class HelloTest  extends GroovyTestCase {
 
 	@Test void testDB() {
 
-		def ordsys12Con = Sql.newInstance("${properties.ordsys12JDBC}", "${properties.jdbcDriver}")
+		config.dbConnections.each { conString ->
+			println conString.ordsys12JDBC
+		}
+
+		def ordsys12Con = Sql.newInstance("${config.dbConnections.ordsys12JDBC}", "${config.jdbcDriver}")
 		def ord12Rows = ordsys12Con.rows("select * from pmt_payment_information where modification_date > sysdate -1/24")
-		println "found ${ord12Rows.size()} ord12Rows"
+		println "INFO found ${ord12Rows.size()} ord12Rows"
 
 //		ord12Rows.each {row ->
 //			println "row: ${row} \n"
 //		}
 
-		def shrSys11Con = Sql.newInstance("${properties.ordsys12JDBC}", "${properties.jdbcDriver}")
+		def shrSys11Con = Sql.newInstance("${config.dbConnections.ordsys12JDBC}", "${config.jdbcDriver}")
 		def shr11Rows = shrSys11Con.rows("select * from pmt_payment_information where modification_date > sysdate -1/24")
-		println "found ${shr11Rows.size()} ord12Rows"
+		println "INFO found ${shr11Rows.size()} shr11Rows"
 
 		def index = 0
 		ord12Rows.each {row ->

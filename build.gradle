@@ -9,13 +9,10 @@ dependencies {
         // Groovy
         [group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.3'],
         [group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.45.0'],
-        [group: 'junit', name: 'junit', version: '4.+'],
-        //[group: 'com.oracle', name: 'ojdbc14', version: '10.+']
+        [group: 'junit', name: 'junit', version: '4.+']
 
-            //[group: 'org.apache.ivy', name:'ivy', version:'2.2.0'],
-
-		//Http-Builder
-		//[group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7'],
+        //Http-Builder
+	      //[group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7'],
     )
 
     compile files('libs/ojdbc14-10.2.0.4.0.jar')
@@ -25,26 +22,13 @@ dependencies {
    )
 }
 
-/*sourceSets {
-  main {
-    groovy {
-      srcDir 'src/main/groovy'
-    }
-  }
-
-  test {
-    groovy {
-        srcDirs = ['test/groovy']
-    }
-  }
-}*/
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.4'
 }
 
 task testAll(type: Test, dependsOn: testClasses) {
-  include 'src/main/test/*'
+  include 'src/main/test/groovy/*'
 }
 
 task forceTest (type: Test, dependsOn: testClasses) {
@@ -55,5 +39,19 @@ task forceTest (type: Test, dependsOn: testClasses) {
 tasks.withType(Test) {
   testLogging {
     events 'started', 'passed'
+  }
+}
+
+task logInfo {
+    logging.captureStandardOutput LogLevel.INFO
+    doFirst {
+        println 'A task message which is logged at INFO level'
+    }
+}
+
+test {
+  testLogging {
+    //makes the standard streams (err and out) visible at console when running tests
+    showStandardStreams = true
   }
 }

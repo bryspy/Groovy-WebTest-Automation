@@ -11,3 +11,4 @@ class Hello{
 def hello = new Hello()
 
 hello.sayHello()
+println "hello again"

@@ -1,0 +1,7 @@
+{
+  "cmd": "./gradlew",
+  "name": "Groovy-WebTest-Automation",
+  "args": [ "test"],
+  "sh": true,
+  "cwd": "{PROJECT_PATH}"
+}
