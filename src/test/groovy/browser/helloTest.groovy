@@ -11,7 +11,6 @@ import org.openqa.selenium.firefox.FirefoxDriver
 
 @RunWith(BlockJUnit4ClassRunner.class)
 class HelloTest  extends GroovyTestCase {
-	
 
 	/*private static ChromeDriverService service*/
 
