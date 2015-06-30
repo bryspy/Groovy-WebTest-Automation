@@ -7,3 +7,7 @@ dbConnections {
   shrsys11JDBC = "jdbc:oracle:thin:tp/tp09281#@dc2db10.dc2.digitalriver.com:1582:SHRSYS11"
   ordsys14JDBC = "jdbc:oracle:thin:tp/tp09281#@gcdbsys091001.c091.digitalriverws.net:1580:ordsys14"
 }
+
+shopperUrls {
+
+}
